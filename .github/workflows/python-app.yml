@@ -1,6 +1,5 @@
 name: Python CI
 
-# Trigger the workflow on any push to the main branch or pull request
 on:
   push:
     branches:
@@ -30,6 +29,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Run tests
+      # Step 4: Run tests with PYTHONPATH set to the 'src' directory
       - name: Run tests
-        run: pytest
+        run: |
+          export PYTHONPATH=$(pwd)/src
+          pytest
